@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package test;
+
+
+enum StatusCode {
+  SUCCESS = 0;
+  UNKNOWN_ERROR = 1;
+  LOCK_TIMEOUT_ERROR = 2;
+  KEY_ALREADY_EXISTS_ERROR = 3;
+  NO_SUCH_KEY_ERROR = 4;
+  OFFSET_OUT_OF_RANGE_ERROR = 5;
+  INVALID_PARAM = 6;
+  NO_SUCH_SUBSCRIBER_ERROR = 7;
+}
+
+
+message TestMessage1 {
+  uint64 key = 1;
+  string msg = 2;
+}
+message TestMessage2 {
+  uint64 field = 1;
+}
+message TestMessage3 {
+  uint64 field = 1;
+}
+
+message TestCases1 {
+  oneof body {
+      TestMessage1 test_msg1 = 1;
+      TestMessage2 test_msg2 = 2;
+      TestMessage3 test_msg3 = 3;
+  }
+}
+
+message IgnoredMessage {
+  repeated TestMessage2 messages = 1;
+}
+
+message TestCasesFoo {
+  oneof foobody {
+      TestMessage1 foo1 = 1;
+      TestMessage2 foo2 = 2;
+  }
+}
+
+
+
+
